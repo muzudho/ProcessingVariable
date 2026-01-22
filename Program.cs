@@ -2,7 +2,11 @@
 using ConsoleApp1;
 using System.Diagnostics;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("テストはじめ！");
+
+
+// りんご
+
 
 string appleInitail = "Apple";
 FruitsModel apple = new FruitsModel(appleInitail);
@@ -21,6 +25,35 @@ System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized =
 Debug.Assert(apple.Name == "Pineapple", "りんごの名前はパイナップルだ");
 Debug.Assert(apple.hasNameInitialized, "初期化だ");
 Debug.Assert(ps == ProcessingState.Initialized, "初期化だ");
+
+
+// バナナ
+
+
+string bananaInitail = null;
+FruitsModel banana = new FruitsModel(bananaInitail);
+
+ps = await ProcessingVariable.SetupAsync<string?>(
+    initial: bananaInitail,
+    current: banana.Name,
+    next: "Banana",
+    banana.hasNameInitialized,
+    onChange: async (args) =>
+    {
+        banana.Name = args.NewValue;
+        banana.hasNameInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}");
+Debug.Assert(banana.Name == "Banana", "バナナの名前はバナナだ");
+Debug.Assert(banana.hasNameInitialized, "初期化だ");
+Debug.Assert(ps == ProcessingState.Initialized, "初期化だ");
+
+
+// おわり
+
+
+System.Console.WriteLine($"テスト完了！");
+
 
 class FruitsModel
 {
