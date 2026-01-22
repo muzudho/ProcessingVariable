@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{7B5B0BC2-7E08-E58C-6436-F53A2B87BA1D}|ConsoleApp1.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7B5B0BC2-7E08-E58C-6436-F53A2B87BA1D}|ConsoleApp1.csproj|e:\\github.com\\muzudho\\processingvariable\\processingstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B5B0BC2-7E08-E58C-6436-F53A2B87BA1D}|ConsoleApp1.csproj|solutionrelative:processingstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7B5B0BC2-7E08-E58C-6436-F53A2B87BA1D}|ConsoleApp1.csproj|e:\\github.com\\muzudho\\processingvariable\\processingvariable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7B5B0BC2-7E08-E58C-6436-F53A2B87BA1D}|ConsoleApp1.csproj|solutionrelative:processingvariable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -32,7 +36,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "E:\\github.com\\muzudho\\ProcessingVariable\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAAAIIAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAowLUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-22T14:54:34.99Z",
               "IsPinned": true,
@@ -40,15 +44,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "README.md",
-              "DocumentMoniker": "E:\\github.com\\muzudho\\ProcessingVariable\\README.md",
-              "RelativeDocumentMoniker": "README.md",
-              "ToolTip": "E:\\github.com\\muzudho\\ProcessingVariable\\README.md",
-              "RelativeToolTip": "README.md",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2026-01-22T15:38:44.665Z",
+              "DocumentIndex": 1,
+              "Title": "ProcessingState.cs",
+              "DocumentMoniker": "E:\\github.com\\muzudho\\ProcessingVariable\\ProcessingState.cs",
+              "RelativeDocumentMoniker": "ProcessingState.cs",
+              "ToolTip": "E:\\github.com\\muzudho\\ProcessingVariable\\ProcessingState.cs",
+              "RelativeToolTip": "ProcessingState.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-22T15:49:15.4Z",
               "EditorCaption": ""
             },
             {
@@ -105,13 +109,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "README.md",
+              "DocumentMoniker": "E:\\github.com\\muzudho\\ProcessingVariable\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "E:\\github.com\\muzudho\\ProcessingVariable\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-01-22T15:38:44.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ProcessingVariable.cs",
               "DocumentMoniker": "E:\\github.com\\muzudho\\ProcessingVariable\\ProcessingVariable.cs",
               "RelativeDocumentMoniker": "ProcessingVariable.cs",
               "ToolTip": "E:\\github.com\\muzudho\\ProcessingVariable\\ProcessingVariable.cs",
               "RelativeToolTip": "ProcessingVariable.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA4wEUAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-22T15:03:50.128Z",
               "EditorCaption": ""
