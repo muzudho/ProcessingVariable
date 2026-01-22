@@ -52,7 +52,7 @@ internal class ProcessingVariable
 
         if (ignore)
         {
-            return ps;  // async に合わせる
+            return ps;  // 早期return
         }
 
         if (!hasInitialized && current == initial)
