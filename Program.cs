@@ -3,15 +3,17 @@ using ConsoleApp1;
 
 Console.WriteLine("Hello, World!");
 
-FruitsModel apple = new FruitsModel("Apple");
+//FruitsModel apple = new FruitsModel("Apple");
+FruitsModel apple = new FruitsModel(null);
 
-(ProcessingState ps, apple.hasNameInitialized) = await ProcessingVariable.SetupAsync<string?>(
+ProcessingState ps = await ProcessingVariable.SetupAsync<string?>(
     current: apple.Name,
     next: "Pineapple",
     apple.hasNameInitialized,
-    onChange: async (newValue) =>
+    onChange: async (args) =>
     {
-        apple.Name = newValue;
+        apple.Name = args.NewValue;
+        apple.hasNameInitialized = args.HasInitialized;
     });
 System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}");
 

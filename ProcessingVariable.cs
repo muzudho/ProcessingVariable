@@ -2,14 +2,26 @@
 
 using System;
 
+internal class ProcessingVariableArgs<T>
+{
+    public T? NewValue { get; set; }
+    public bool HasInitialized { get; set; }
+
+    public ProcessingVariableArgs(T? value, bool hasInitialized)
+    {
+        this.NewValue = value;
+        this.HasInitialized = hasInitialized;
+    }
+}
+
 internal class ProcessingVariable
 {
-    public static async Task<(ProcessingState State, bool HasInitialized)> SetupAsync<T>(
+    public static async Task<ProcessingState> SetupAsync<T>(
         T? current,                       // 修正: in → 普通のパラメータ（asyncでin NG。コピー渡しでOK）
         T? next,                          // 新しい値
         bool hasInitialized,              // 修正: ref → 入力コピー（判定用）
         bool ignore = false,
-        Func<T?, Task> onChange = null)   // オプションのまま
+        Func<ProcessingVariableArgs<T>, Task> onChange = null)   // オプションのまま
         where T : class
     {
         // `ps` - ProcessingState（状態管理用 enum）
@@ -18,7 +30,7 @@ internal class ProcessingVariable
 
         if (ignore)
         {
-            return (ps, newInitialized);  // 早期return（Task.FromResultいらずでTuple）
+            return ps;  // 早期return
         }
 
         if (!hasInitialized && current == null)
@@ -42,10 +54,12 @@ internal class ProcessingVariable
         {
             if (onChange != null)
             {
-                await onChange(next);  // next null渡しOK
+                await onChange(new ProcessingVariableArgs<T>(
+                    value: next,
+                    hasInitialized: newInitialized));  // next null渡しOK
             }
         }
 
-        return (ps, newInitialized);  // 修正: TupleでStateとHasInitialized返却
+        return ps;
     }
 }
