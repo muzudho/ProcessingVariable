@@ -16,13 +16,24 @@ internal class ProcessingVariableArgs<T>
 
 internal class ProcessingVariable
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="initial">デフォルト/初期値（例: null）。初回設定かの判定に使う</param>
+    /// <param name="current">現在の値</param>
+    /// <param name="next">新しい値</param>
+    /// <param name="hasInitialized">初期化済みかどうかは、外部で記憶してください</param>
+    /// <param name="ignore">何もせず早期returnするなら真</param>
+    /// <param name="onChange"></param>
+    /// <returns></returns>
     public static async Task<ProcessingState> SetupAsync<T>(
-        T? initial,                         // 初期値
-        T? current,                         // 現在地
-        T? next,                            // 新しい値
-        bool hasInitialized,                // 初期化済みかの記録
+        T? initial,
+        T? current,
+        T? next,
+        bool hasInitialized,
         bool ignore = false,
-        Func<ProcessingVariableArgs<T>, Task> onChange = null)   // オプションのまま
+        Func<ProcessingVariableArgs<T>, Task>? onChange = null)
         where T : class
     {
         // `ps` - ProcessingState（状態管理用 enum）
@@ -31,14 +42,14 @@ internal class ProcessingVariable
 
         if (ignore)
         {
-            return ps;  // 早期return
+            return ps;  // async に合わせる
         }
 
         if (!hasInitialized && current == initial)
         {
             if (next == initial)
             {
-                ps = ProcessingState.NotSet;  // 未設定
+                ps = ProcessingState.NotSet;  // 未設定（初期値と同じ）
             }
             else
             {
@@ -55,9 +66,10 @@ internal class ProcessingVariable
         {
             if (onChange != null)
             {
-                await onChange(new ProcessingVariableArgs<T>(
-                    value: next,
-                    hasInitialized: newInitialized));  // next null渡しOK
+                var args = new ProcessingVariableArgs<T>(
+                    value: next,  // null渡しOK
+                    hasInitialized: newInitialized);
+                await onChange(args);
             }
         }
 

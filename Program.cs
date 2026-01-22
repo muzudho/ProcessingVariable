@@ -3,7 +3,6 @@ using ConsoleApp1;
 
 Console.WriteLine("Hello, World!");
 
-//FruitsModel apple = new FruitsModel("Apple");
 string appleInitail = "Apple";
 FruitsModel apple = new FruitsModel(appleInitail);
 
