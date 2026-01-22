@@ -17,9 +17,10 @@ internal class ProcessingVariableArgs<T>
 internal class ProcessingVariable
 {
     public static async Task<ProcessingState> SetupAsync<T>(
-        T? current,                       // 修正: in → 普通のパラメータ（asyncでin NG。コピー渡しでOK）
-        T? next,                          // 新しい値
-        bool hasInitialized,              // 修正: ref → 入力コピー（判定用）
+        T? initial,                         // 初期値
+        T? current,                         // 現在地
+        T? next,                            // 新しい値
+        bool hasInitialized,                // 初期化済みかの記録
         bool ignore = false,
         Func<ProcessingVariableArgs<T>, Task> onChange = null)   // オプションのまま
         where T : class
@@ -33,9 +34,9 @@ internal class ProcessingVariable
             return ps;  // 早期return
         }
 
-        if (!hasInitialized && current == null)
+        if (!hasInitialized && current == initial)
         {
-            if (next == null)
+            if (next == initial)
             {
                 ps = ProcessingState.NotSet;  // 未設定
             }

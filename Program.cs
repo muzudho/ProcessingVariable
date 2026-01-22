@@ -4,9 +4,11 @@ using ConsoleApp1;
 Console.WriteLine("Hello, World!");
 
 //FruitsModel apple = new FruitsModel("Apple");
-FruitsModel apple = new FruitsModel(null);
+string appleInitail = "Apple";
+FruitsModel apple = new FruitsModel(appleInitail);
 
 ProcessingState ps = await ProcessingVariable.SetupAsync<string?>(
+    initial: appleInitail,
     current: apple.Name,
     next: "Pineapple",
     apple.hasNameInitialized,
