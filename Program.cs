@@ -3,30 +3,30 @@ using ConsoleApp1;
 
 Console.WriteLine("Hello, World!");
 
-AppleModel apple = new AppleModel(string.Empty);
+FruitsModel apple = new FruitsModel("Apple");
 
-var ps = await ProcessingVariable.SetupAsync<AppleModel>(
-    current: apple,
-    next: new AppleModel("Apple"),
-    apple.hasAppleInitialized,
+(ProcessingState ps, apple.hasNameInitialized) = await ProcessingVariable.SetupAsync<string?>(
+    current: apple.Name,
+    next: "Pineapple",
+    apple.hasNameInitialized,
     onChange: async (newValue) =>
     {
-        apple = newValue;
+        apple.Name = newValue;
     });
-System.Console.WriteLine($"ps = {ps}");
+System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}");
 
-class AppleModel
+class FruitsModel
 {
-    public AppleModel(string appleStr)
+    public FruitsModel(string? name)
     {
-        this.appleStr = appleStr;
+        this.name = name;
     }
 
-    public string? AppleStr
+    public string? Name
     {
-        get { return appleStr; }
-        set { appleStr = value; }
+        get { return name; }
+        set { name = value; }
     }
-    string? appleStr = null;
-    public bool hasAppleInitialized = false;
+    string? name = null;
+    public bool hasNameInitialized = false;
 }
