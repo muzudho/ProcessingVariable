@@ -3,7 +3,7 @@ using ConsoleApp1;
 using System.Diagnostics;
 
 Console.WriteLine("テストはじめ！");
-
+ProcessingState ps;
 
 // りんご
 
@@ -11,7 +11,24 @@ Console.WriteLine("テストはじめ！");
 string appleInitail = "Apple";
 FruitsModel apple = new FruitsModel(appleInitail);
 
-ProcessingState ps = await ProcessingVariable.SetupAsync<string?>(
+
+ps = await ProcessingVariable.SetupAsync<string?>(
+    initial: appleInitail,
+    current: apple.Name,
+    next: "Apple",
+    apple.hasNameInitialized,
+    onChange: async (args) =>
+    {
+        apple.Name = args.NewValue;
+        apple.hasNameInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}");
+Debug.Assert(apple.Name == "Apple", "りんごの名前はアップルだ");
+Debug.Assert(!apple.hasNameInitialized, "未設定だ");
+Debug.Assert(ps == ProcessingState.NotSet, "未設定だ");
+
+
+ps = await ProcessingVariable.SetupAsync<string?>(
     initial: appleInitail,
     current: apple.Name,
     next: "Pineapple",
@@ -23,8 +40,24 @@ ProcessingState ps = await ProcessingVariable.SetupAsync<string?>(
     });
 System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}");
 Debug.Assert(apple.Name == "Pineapple", "りんごの名前はパイナップルだ");
-Debug.Assert(apple.hasNameInitialized, "初期化だ");
+Debug.Assert(apple.hasNameInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Initialized, "初期化だ");
+
+
+ps = await ProcessingVariable.SetupAsync<string?>(
+    initial: appleInitail,
+    current: apple.Name,
+    next: "リンゴ",
+    apple.hasNameInitialized,
+    onChange: async (args) =>
+    {
+        apple.Name = args.NewValue;
+        apple.hasNameInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}");
+Debug.Assert(apple.Name == "リンゴ", "りんごの名前はリンゴだ");
+Debug.Assert(apple.hasNameInitialized, "初期化済みだ");
+Debug.Assert(ps == ProcessingState.Modified, "修正だ");
 
 
 // バナナ
@@ -32,6 +65,23 @@ Debug.Assert(ps == ProcessingState.Initialized, "初期化だ");
 
 string bananaInitail = null;
 FruitsModel banana = new FruitsModel(bananaInitail);
+
+
+ps = await ProcessingVariable.SetupAsync<string?>(
+    initial: bananaInitail,
+    current: banana.Name,
+    next: bananaInitail,
+    banana.hasNameInitialized,
+    onChange: async (args) =>
+    {
+        banana.Name = args.NewValue;
+        banana.hasNameInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}");
+Debug.Assert(banana.Name == bananaInitail, "バナナの名前はヌルだ");
+Debug.Assert(!banana.hasNameInitialized, "未設定だ");
+Debug.Assert(ps == ProcessingState.NotSet, "未設定だ");
+
 
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: bananaInitail,
@@ -45,7 +95,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     });
 System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}");
 Debug.Assert(banana.Name == "Banana", "バナナの名前はバナナだ");
-Debug.Assert(banana.hasNameInitialized, "初期化だ");
+Debug.Assert(banana.hasNameInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Initialized, "初期化だ");
 
 
