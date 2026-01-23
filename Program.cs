@@ -5,28 +5,29 @@ using System.Diagnostics;
 Console.WriteLine("テストはじめ！");
 ProcessingState ps;
 
+
 // りんご
 
 
-string appleInitail = "Apple";
-FruitsModel apple = new FruitsModel(appleInitail);
+string? appleInitail = "Apple";
+FruitsModel<string?> apple = new FruitsModel<string?>(appleInitail);
 
 
 // ［未設定］を検知するテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: appleInitail,
-    current: apple.Name,
+    current: apple.Value,
     next: "Apple",
-    apple.hasNameInitialized,
+    apple.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        apple.Name = args.NewValue;
-        apple.hasNameInitialized = args.HasInitialized;
+        apple.Value = args.NewValue;
+        apple.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(apple.Name == "Apple", "りんごの名前はアップルだ");
-Debug.Assert(!apple.hasNameInitialized, "未設定だ");
+System.Console.WriteLine($"apple.Value = {apple.Value}, apple.hasValueInitialized = {apple.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(apple.Value == "Apple", "りんごの名前はアップルだ");
+Debug.Assert(!apple.hasValueInitialized, "未設定だ");
 Debug.Assert(ps == ProcessingState.NotSet, "未設定だ");
 Debug.Assert(!ps.IsChanged(), "変更無し");
 
@@ -34,18 +35,18 @@ Debug.Assert(!ps.IsChanged(), "変更無し");
 // ［初期化］を検知するテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: appleInitail,
-    current: apple.Name,
+    current: apple.Value,
     next: "Pineapple",
-    apple.hasNameInitialized,
+    apple.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        apple.Name = args.NewValue;
-        apple.hasNameInitialized = args.HasInitialized;
+        apple.Value = args.NewValue;
+        apple.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(apple.Name == "Pineapple", "りんごの名前はパイナップルだ");
-Debug.Assert(apple.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"apple.Value = {apple.Value}, apple.hasValueInitialized = {apple.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(apple.Value == "Pineapple", "りんごの名前はパイナップルだ");
+Debug.Assert(apple.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Initialized, "初期化だ");
 Debug.Assert(ps.IsChanged(), "変更だ");
 
@@ -53,18 +54,18 @@ Debug.Assert(ps.IsChanged(), "変更だ");
 // ［変更無し］を検知するテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: appleInitail,
-    current: apple.Name,
+    current: apple.Value,
     next: "Pineapple",
-    apple.hasNameInitialized,
+    apple.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        apple.Name = args.NewValue;
-        apple.hasNameInitialized = args.HasInitialized;
+        apple.Value = args.NewValue;
+        apple.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(apple.Name == "Pineapple", "りんごの名前はパイナップルだ");
-Debug.Assert(apple.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"apple.Value = {apple.Value}, apple.hasValueInitialized = {apple.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(apple.Value == "Pineapple", "りんごの名前はパイナップルだ");
+Debug.Assert(apple.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Unchanged, "変更無し");
 Debug.Assert(!ps.IsChanged(), "変更無し");
 
@@ -72,18 +73,18 @@ Debug.Assert(!ps.IsChanged(), "変更無し");
 // ［修正］を検知するテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: appleInitail,
-    current: apple.Name,
+    current: apple.Value,
     next: "リンゴ",
-    apple.hasNameInitialized,
+    apple.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        apple.Name = args.NewValue;
-        apple.hasNameInitialized = args.HasInitialized;
+        apple.Value = args.NewValue;
+        apple.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(apple.Name == "リンゴ", "りんごの名前はリンゴだ");
-Debug.Assert(apple.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"apple.Value = {apple.Value}, apple.hasValueInitialized = {apple.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(apple.Value == "リンゴ", "りんごの名前はリンゴだ");
+Debug.Assert(apple.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Modified, "修正だ");
 Debug.Assert(ps.IsChanged(), "変更だ");
 
@@ -91,18 +92,18 @@ Debug.Assert(ps.IsChanged(), "変更だ");
 // 未設定値に戻しても［修正］と判定されるテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: appleInitail,
-    current: apple.Name,
+    current: apple.Value,
     next: appleInitail,
-    apple.hasNameInitialized,
+    apple.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        apple.Name = args.NewValue;
-        apple.hasNameInitialized = args.HasInitialized;
+        apple.Value = args.NewValue;
+        apple.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(apple.Name == appleInitail, "りんごの名前はアップルだ");
-Debug.Assert(apple.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"apple.Value = {apple.Value}, apple.hasValueInitialized = {apple.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(apple.Value == appleInitail, "りんごの名前はアップルだ");
+Debug.Assert(apple.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Modified, "修正だ");
 Debug.Assert(ps.IsChanged(), "変更だ");
 
@@ -110,18 +111,18 @@ Debug.Assert(ps.IsChanged(), "変更だ");
 // 未設定値から設定しても［修正］と判定されるテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: appleInitail,
-    current: apple.Name,
+    current: apple.Value,
     next: "みかん",
-    apple.hasNameInitialized,
+    apple.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        apple.Name = args.NewValue;
-        apple.hasNameInitialized = args.HasInitialized;
+        apple.Value = args.NewValue;
+        apple.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"apple.Name = {apple.Name}, apple.hasNameInitialized = {apple.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(apple.Name == "みかん", "りんごの名前はみかんだ");
-Debug.Assert(apple.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"apple.Value = {apple.Value}, apple.hasValueInitialized = {apple.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(apple.Value == "みかん", "りんごの名前はみかんだ");
+Debug.Assert(apple.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Modified, "修正だ");    // 初期化ではない
 Debug.Assert(ps.IsChanged(), "変更だ");
 
@@ -129,25 +130,25 @@ Debug.Assert(ps.IsChanged(), "変更だ");
 // バナナ
 
 
-string bananaInitail = null;
-FruitsModel banana = new FruitsModel(bananaInitail);
+string? bananaInitail = null;
+FruitsModel<string?> banana = new FruitsModel<string?>(bananaInitail);
 
 
 // ［未設定］を検知するテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: bananaInitail,
-    current: banana.Name,
+    current: banana.Value,
     next: bananaInitail,
-    banana.hasNameInitialized,
+    banana.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        banana.Name = args.NewValue;
-        banana.hasNameInitialized = args.HasInitialized;
+        banana.Value = args.NewValue;
+        banana.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(banana.Name == bananaInitail, "バナナの名前はヌルだ");
-Debug.Assert(!banana.hasNameInitialized, "未設定だ");
+System.Console.WriteLine($"banana.Value = {banana.Value}, banana.hasValueInitialized = {banana.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(banana.Value == bananaInitail, "バナナの名前はヌルだ");
+Debug.Assert(!banana.hasValueInitialized, "未設定だ");
 Debug.Assert(ps == ProcessingState.NotSet, "未設定だ");
 Debug.Assert(!ps.IsChanged(), "変更無し");
 
@@ -155,18 +156,18 @@ Debug.Assert(!ps.IsChanged(), "変更無し");
 // ［初期化］を検知するテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: bananaInitail,
-    current: banana.Name,
+    current: banana.Value,
     next: "Banana",
-    banana.hasNameInitialized,
+    banana.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        banana.Name = args.NewValue;
-        banana.hasNameInitialized = args.HasInitialized;
+        banana.Value = args.NewValue;
+        banana.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(banana.Name == "Banana", "バナナの名前はバナナだ");
-Debug.Assert(banana.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"banana.Value = {banana.Value}, banana.hasValueInitialized = {banana.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(banana.Value == "Banana", "バナナの名前はバナナだ");
+Debug.Assert(banana.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Initialized, "初期化だ");
 Debug.Assert(ps.IsChanged(), "変更だ");
 
@@ -174,18 +175,18 @@ Debug.Assert(ps.IsChanged(), "変更だ");
 // ［変更無し］を検知するテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: bananaInitail,
-    current: banana.Name,
+    current: banana.Value,
     next: "Banana",
-    banana.hasNameInitialized,
+    banana.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        banana.Name = args.NewValue;
-        banana.hasNameInitialized = args.HasInitialized;
+        banana.Value = args.NewValue;
+        banana.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(banana.Name == "Banana", "バナナの名前はバナナだ");
-Debug.Assert(banana.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"banana.Value = {banana.Value}, banana.hasValueInitialized = {banana.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(banana.Value == "Banana", "バナナの名前はバナナだ");
+Debug.Assert(banana.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Unchanged, "変更無し");
 Debug.Assert(!ps.IsChanged(), "変更無し");
 
@@ -193,18 +194,18 @@ Debug.Assert(!ps.IsChanged(), "変更無し");
 // ［修正］を検知するテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: bananaInitail,
-    current: banana.Name,
+    current: banana.Value,
     next: "ブーメラン",
-    banana.hasNameInitialized,
+    banana.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        banana.Name = args.NewValue;
-        banana.hasNameInitialized = args.HasInitialized;
+        banana.Value = args.NewValue;
+        banana.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(banana.Name == "ブーメラン", "バナナの名前はブーメランだ");
-Debug.Assert(banana.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"banana.Value = {banana.Value}, banana.hasValueInitialized = {banana.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(banana.Value == "ブーメラン", "バナナの名前はブーメランだ");
+Debug.Assert(banana.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Modified, "修正だ");
 Debug.Assert(ps.IsChanged(), "変更だ");
 
@@ -212,18 +213,18 @@ Debug.Assert(ps.IsChanged(), "変更だ");
 // 未設定値に戻しても［修正］と判定されるテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: bananaInitail,
-    current: banana.Name,
+    current: banana.Value,
     next: bananaInitail,
-    banana.hasNameInitialized,
+    banana.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        banana.Name = args.NewValue;
-        banana.hasNameInitialized = args.HasInitialized;
+        banana.Value = args.NewValue;
+        banana.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(banana.Name == bananaInitail, "バナナの名前はヌルだ");
-Debug.Assert(banana.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"banana.Value = {banana.Value}, banana.hasValueInitialized = {banana.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(banana.Value == bananaInitail, "バナナの名前はヌルだ");
+Debug.Assert(banana.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Modified, "修正だ");
 Debug.Assert(ps.IsChanged(), "変更だ");
 
@@ -231,18 +232,141 @@ Debug.Assert(ps.IsChanged(), "変更だ");
 // 未設定値から設定しても［修正］と判定されるテスト
 ps = await ProcessingVariable.SetupAsync<string?>(
     initial: bananaInitail,
-    current: banana.Name,
+    current: banana.Value,
     next: "モンキーバナナ",
-    banana.hasNameInitialized,
+    banana.hasValueInitialized,
     onChange: async (args) =>
     {
         System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
-        banana.Name = args.NewValue;
-        banana.hasNameInitialized = args.HasInitialized;
+        banana.Value = args.NewValue;
+        banana.hasValueInitialized = args.HasInitialized;
     });
-System.Console.WriteLine($"banana.Name = {banana.Name}, banana.hasNameInitialized = {banana.hasNameInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
-Debug.Assert(banana.Name == "モンキーバナナ", "バナナの名前はモンキーバナナだ");
-Debug.Assert(banana.hasNameInitialized, "初期化済みだ");
+System.Console.WriteLine($"banana.Value = {banana.Value}, banana.hasValueInitialized = {banana.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(banana.Value == "モンキーバナナ", "バナナの名前はモンキーバナナだ");
+Debug.Assert(banana.hasValueInitialized, "初期化済みだ");
+Debug.Assert(ps == ProcessingState.Modified, "修正だ");    // 初期化ではない
+Debug.Assert(ps.IsChanged(), "変更だ");
+
+
+
+
+// チェリー
+
+
+double? cherryInitail = 0.0d;
+FruitsModel<double?> cherry = new FruitsModel<double?>(cherryInitail);
+
+
+// ［未設定］を検知するテスト
+ps = await ProcessingVariable.SetupAsync<double?>(
+    initial: cherryInitail,
+    current: cherry.Value,
+    next: cherryInitail,
+    cherry.hasValueInitialized,
+    onChange: async (args) =>
+    {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
+        cherry.Value = args.NewValue;
+        cherry.hasValueInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"cherry.Value = {cherry.Value}, cherry.hasValueInitialized = {cherry.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(cherry.Value == cherryInitail, "チェリーは 0.0d だ");
+Debug.Assert(!cherry.hasValueInitialized, "未設定だ");
+Debug.Assert(ps == ProcessingState.NotSet, "未設定だ");
+Debug.Assert(!ps.IsChanged(), "変更無し");
+
+
+// ［初期化］を検知するテスト
+ps = await ProcessingVariable.SetupAsync<double?>(
+    initial: cherryInitail,
+    current: cherry.Value,
+    next: 1.0d,
+    cherry.hasValueInitialized,
+    onChange: async (args) =>
+    {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
+        cherry.Value = args.NewValue;
+        cherry.hasValueInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"cherry.Value = {cherry.Value}, cherry.hasValueInitialized = {cherry.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(cherry.Value == 1.0d, "チェリーは 1.0d だ");
+Debug.Assert(cherry.hasValueInitialized, "初期化済みだ");
+Debug.Assert(ps == ProcessingState.Initialized, "初期化だ");
+Debug.Assert(ps.IsChanged(), "変更だ");
+
+
+// ［変更無し］を検知するテスト
+ps = await ProcessingVariable.SetupAsync<double?>(
+    initial: cherryInitail,
+    current: cherry.Value,
+    next: 1.0d,
+    cherry.hasValueInitialized,
+    onChange: async (args) =>
+    {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
+        cherry.Value = args.NewValue;
+        cherry.hasValueInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"cherry.Value = {cherry.Value}, cherry.hasValueInitialized = {cherry.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(cherry.Value == 1.0d, "チェリーは 1.0d だ");
+Debug.Assert(cherry.hasValueInitialized, "初期化済みだ");
+Debug.Assert(ps == ProcessingState.Unchanged, "変更無し");
+Debug.Assert(!ps.IsChanged(), "変更無し");
+
+
+// ［修正］を検知するテスト
+ps = await ProcessingVariable.SetupAsync<double?>(
+    initial: cherryInitail,
+    current: cherry.Value,
+    next: 2.5d,
+    cherry.hasValueInitialized,
+    onChange: async (args) =>
+    {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
+        cherry.Value = args.NewValue;
+        cherry.hasValueInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"cherry.Value = {cherry.Value}, cherry.hasValueInitialized = {cherry.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(cherry.Value == 2.5d, "チェリーは 2.5d だ");
+Debug.Assert(cherry.hasValueInitialized, "初期化済みだ");
+Debug.Assert(ps == ProcessingState.Modified, "修正だ");
+Debug.Assert(ps.IsChanged(), "変更だ");
+
+
+// 未設定値に戻しても［修正］と判定されるテスト
+ps = await ProcessingVariable.SetupAsync<double?>(
+    initial: cherryInitail,
+    current: cherry.Value,
+    next: cherryInitail,
+    cherry.hasValueInitialized,
+    onChange: async (args) =>
+    {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
+        cherry.Value = args.NewValue;
+        cherry.hasValueInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"cherry.Value = {cherry.Value}, cherry.hasValueInitialized = {cherry.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(cherry.Value == cherryInitail, "チェリーは 0.0d だ");
+Debug.Assert(cherry.hasValueInitialized, "初期化済みだ");
+Debug.Assert(ps == ProcessingState.Modified, "修正だ");
+Debug.Assert(ps.IsChanged(), "変更だ");
+
+
+// 未設定値から設定しても［修正］と判定されるテスト
+ps = await ProcessingVariable.SetupAsync<double?>(
+    initial: cherryInitail,
+    current: cherry.Value,
+    next: 5.1d,
+    cherry.hasValueInitialized,
+    onChange: async (args) =>
+    {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
+        cherry.Value = args.NewValue;
+        cherry.hasValueInitialized = args.HasInitialized;
+    });
+System.Console.WriteLine($"cherry.Value = {cherry.Value}, cherry.hasValueInitialized = {cherry.hasValueInitialized}, ps = {ps}, ps.IsChanged() = {ps.IsChanged()}");
+Debug.Assert(cherry.Value == 5.1d, "チェリーは 5.1d だ");
+Debug.Assert(cherry.hasValueInitialized, "初期化済みだ");
 Debug.Assert(ps == ProcessingState.Modified, "修正だ");    // 初期化ではない
 Debug.Assert(ps.IsChanged(), "変更だ");
 
@@ -253,18 +377,18 @@ Debug.Assert(ps.IsChanged(), "変更だ");
 System.Console.WriteLine($"テスト完了！");
 
 
-class FruitsModel
+class FruitsModel<T>
 {
-    public FruitsModel(string? name)
+    public FruitsModel(T? name)
     {
-        this.name = name;
+        this.value = name;
     }
 
-    public string? Name
+    public T? Value
     {
-        get { return name; }
-        set { name = value; }
+        get { return value; }
+        set { this.value = value; }
     }
-    string? name = null;
-    public bool hasNameInitialized = false;
+    T? value = default;
+    public bool hasValueInitialized = false;
 }

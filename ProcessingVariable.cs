@@ -1,6 +1,7 @@
 ﻿namespace ConsoleApp1;
 
 using System;
+using System.Collections.Generic; // EqualityComparer用
 
 
 /// <summary>
@@ -13,7 +14,7 @@ internal class ProcessingVariable
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="initial">デフォルト/初期値（例: null）。初回設定かの判定に使う</param>
+    /// <param name="initial">デフォルト/初期値（例: null or default(T)）。初回設定かの判定に使う</param>
     /// <param name="current">現在の値</param>
     /// <param name="next">新しい値</param>
     /// <param name="hasInitialized">初期化済みかどうかは、外部で記憶してください</param>
@@ -27,7 +28,6 @@ internal class ProcessingVariable
         bool hasInitialized,
         bool ignore = false,
         Func<ProcessingVariableArgs<T>, Task>? onChange = null)
-        where T : class
     {
         // `ps` - ProcessingState（状態管理用 enum）
         ProcessingState ps = ProcessingState.Unchanged;  // 変更無し
@@ -38,9 +38,15 @@ internal class ProcessingVariable
             return ps;  // 早期return
         }
 
-        if (!hasInitialized && current == initial)
+        // 比較用ヘルパー（null-safeで値/参照両対応）
+        var comparer = EqualityComparer<T>.Default;
+
+        // 未初期化時の判定: currentがinitial（またはdefault）と一致するか
+        bool isInitialState = !hasInitialized && comparer.Equals(current, initial);
+
+        if (isInitialState)
         {
-            if (next == initial)
+            if (comparer.Equals(next, initial))
             {
                 ps = ProcessingState.NotSet;  // 未設定（初期値と同じ）
             }
@@ -50,7 +56,7 @@ internal class ProcessingVariable
                 newInitialized = true;  // ここで更新（出力用）
             }
         }
-        else if (next != current)
+        else if (!comparer.Equals(next, current)) // 変更判定（null-safe）
         {
             ps = ProcessingState.Modified;  // 変更
         }
