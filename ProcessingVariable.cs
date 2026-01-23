@@ -4,23 +4,6 @@ using System;
 
 
 /// <summary>
-/// onChange フックの引数の型
-/// </summary>
-/// <typeparam name="T"></typeparam>
-internal class ProcessingVariableArgs<T>
-{
-    public T? NewValue { get; set; }
-    public bool HasInitialized { get; set; }
-
-    public ProcessingVariableArgs(T? value, bool hasInitialized)
-    {
-        this.NewValue = value;
-        this.HasInitialized = hasInitialized;
-    }
-}
-
-
-/// <summary>
 /// ［初期設定］なのか［修正］なのか、［未設定］なのか［変更無し］なのか、判別できるもの。
 /// イベント発火に利用する。
 /// </summary>
@@ -77,7 +60,9 @@ internal class ProcessingVariable
             if (onChange != null)
             {
                 var args = new ProcessingVariableArgs<T>(
-                    value: next,  // null渡しOK
+                    initialValue: initial,
+                    oldValue: current,
+                    newValue: next,  // null渡しOK
                     hasInitialized: newInitialized);
                 await onChange(args);
             }

@@ -20,6 +20,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     apple.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         apple.Name = args.NewValue;
         apple.hasNameInitialized = args.HasInitialized;
     });
@@ -38,6 +39,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     apple.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         apple.Name = args.NewValue;
         apple.hasNameInitialized = args.HasInitialized;
     });
@@ -56,6 +58,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     apple.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         apple.Name = args.NewValue;
         apple.hasNameInitialized = args.HasInitialized;
     });
@@ -74,6 +77,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     apple.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         apple.Name = args.NewValue;
         apple.hasNameInitialized = args.HasInitialized;
     });
@@ -92,6 +96,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     apple.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         apple.Name = args.NewValue;
         apple.hasNameInitialized = args.HasInitialized;
     });
@@ -110,6 +115,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     apple.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         apple.Name = args.NewValue;
         apple.hasNameInitialized = args.HasInitialized;
     });
@@ -135,6 +141,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     banana.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         banana.Name = args.NewValue;
         banana.hasNameInitialized = args.HasInitialized;
     });
@@ -153,6 +160,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     banana.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         banana.Name = args.NewValue;
         banana.hasNameInitialized = args.HasInitialized;
     });
@@ -171,6 +179,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     banana.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         banana.Name = args.NewValue;
         banana.hasNameInitialized = args.HasInitialized;
     });
@@ -189,6 +198,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     banana.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         banana.Name = args.NewValue;
         banana.hasNameInitialized = args.HasInitialized;
     });
@@ -207,6 +217,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     banana.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         banana.Name = args.NewValue;
         banana.hasNameInitialized = args.HasInitialized;
     });
@@ -225,6 +236,7 @@ ps = await ProcessingVariable.SetupAsync<string?>(
     banana.hasNameInitialized,
     onChange: async (args) =>
     {
+        System.Console.WriteLine($"{args.OldValue}→{args.NewValue}。 initial:{args.InitialValue}, initialized:{args.HasInitialized}");
         banana.Name = args.NewValue;
         banana.hasNameInitialized = args.HasInitialized;
     });
